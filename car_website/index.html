@@ -11,7 +11,7 @@
     <h2>Enter Car Details</h2>
     <p>Please provide your car information</p>
 
-<form action="/register" method="POST">
+<form id="carForm"action="/register" method="POST">
     <label for="brand">Brand</label><br>
     <input type="text" id="brand" name="brand" placeholder="Enter car brand" required><br>
 
@@ -28,7 +28,8 @@
         <option>Truck</option>
         <option>Coupe</option>
     </select><br>
-    <button>Register Car</button>
+    <button id="registerButton">Register Car</button>
 </form>
+<script src="script.js"></script>
 </body>
 </html>
