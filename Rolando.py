@@ -16,7 +16,7 @@ def validate_username(username):
         return "valid username"
     else:
         return "invalid username"
-        
+
 ## validate year usuing nested conditional statement
 
 def validate_year(year):
@@ -67,7 +67,7 @@ while index < len(registrations):
 
     index += 1
 
-    ## summarize the registration
+    ## summarize the registration using an f-string to print.
 
 print("===== REGISTRATION SUMMARY =====")
 print(f"Total registrations: {len(registrations)}")
