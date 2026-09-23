@@ -16,6 +16,8 @@ def validate_username(username):
         return "valid username"
     else:
         return "invalid username"
+        
+## validate year usuing nested conditional statement
 
 def validate_year(year):
     if year.isdigit():
@@ -29,6 +31,8 @@ def validate_year(year):
 
 def process_registration(registration):
 
+## proceess the registration
+
     username = registration[0]
     brand = registration[1]
     model = registration[2]
@@ -40,6 +44,8 @@ def process_registration(registration):
 
     username_status = validate_username(username)
     year_status = validate_year(year)
+
+## use a nested conditional statment to validate year and username
 
     if username_status == "valid username":
         if year_status == "valid year":
@@ -60,6 +66,9 @@ while index < len(registrations):
     process_registration(registration)
 
     index += 1
+
+    ## summarize the registration
+
 print("===== REGISTRATION SUMMARY =====")
 print(f"Total registrations: {len(registrations)}")
 print(f"Accepted: {len(accepted)}")
