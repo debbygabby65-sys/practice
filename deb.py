@@ -43,3 +43,16 @@ while index < len(registrations):
     print(username_status)
     print(year_status)
     index += 1
+## you can use from calculator import validate_username to import calculator##
+from calculator import validate_username
+username = "    DEBBY123    "
+result = validate_username(username)
+print(result)
+
+from calculator import validate_username, validate_year
+username = "    DEBBY124    "
+year = "2020"
+username_status = validate_username(username)
+year_status = validate_year(year)
+print(username_status)
+print(year_status)
