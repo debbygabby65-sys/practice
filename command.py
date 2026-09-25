@@ -86,3 +86,7 @@ print(people["user1"])
 
 for user, details in people.items(): 
     print(details["name"], details["age"])
+    if details["age"] >= 25:
+        print(details["name"], "is 25 or older")
+    else:
+        print(details["age"], "is under 25")
