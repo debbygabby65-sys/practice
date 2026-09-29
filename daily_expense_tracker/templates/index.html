@@ -7,7 +7,7 @@
 <body>
     <h1>Daily Expense Tracker</h1>
 
-    <form>
+    <form method="POST" action="/add-expense">
     <label>Description:</label>
     <input type="text" name="description">
 
@@ -32,6 +32,14 @@
 
     <button type="submit">Add Expense</button>
     </form>
+<h2>Total Spent: ₦{{ total }}</h2>
+<h2>Expenses</h2>
+{% for expense in expenses %}
+    <p>
+        {{ expense[1] }} - ₦{{ "{:,.0f}".format(expense[2]) }} - {{ expense[3] }}
+    </p>
+{% endfor %}     
 </body>    
 </html>
+
 
