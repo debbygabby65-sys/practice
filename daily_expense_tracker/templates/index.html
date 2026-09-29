@@ -38,6 +38,9 @@
     <p>
         {{ expense[1] }} - ₦{{ "{:,.0f}".format(expense[2]) }} - {{ expense[3] }}
     </p>
+    <form method="POST" action="/delete-expense/{{ expense[0] }}">
+    <button type="submit">Delete</button>
+</form>
 {% endfor %}     
 </body>    
 </html>

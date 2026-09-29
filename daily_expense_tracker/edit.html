@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Expense</title>
+</head>
+
+<body>
+    <h1>Edit Expense</h1>
+
+    <form method="POST">
+
+        <label>Description:</label>
+        <input type="text" name="description" value="{{ expense[1] }}">
+
+        <br><br>
+
+        <label>Amount:</label>
+        <input type="number" name="amount" value="{{ expense[2] }}">
+
+        <br><br>
+
+        <label>Category:</label>
+        <select name="category">
+            <option>Food</option>
+            <option>Transport</option>
+            <option>Bills</option>
+            <option>Shopping</option>
+            <option>Health</option>
+            <option>Other</option>
+        </select>
+
+        <br><br>
+
+        <button type="submit">Save Changes</button>
+
+    </form>
+</body>
+</html>
+      
