@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect
 from database import get_db, get_expenses, get_total
-
+from datetime import date
 app = Flask(__name__)
 
 @app.route("/")
@@ -27,18 +27,16 @@ def add_expense():
       return "Description is required"
     
     db = get_db()
-
     db.execute(
-        "INSERT INTO expenses (description, amount, category) VALUES (?, ?, ?)",
-        (description, amount, category)
+    "INSERT INTO expenses (description, amount, category, date) VALUES (?, ?, ?, ?)",
+    (description, amount, category, date.today().isoformat())
     )
-
+    
     db.commit()
     db.close()
 
     return redirect("/")
-    db = get_db()
-    db
+    
 @app.route("/delete-expense/<int:expense_id>", methods=["POST"])
 def delete_expense(expense_id):
     db = get_db()
@@ -57,7 +55,22 @@ def edit_expense(expense_id):
     if request.method == "POST":
         description = request.form["description"]
         amount = request.form["amount"]
+        try:
+            amount = float(amount)
+        except ValueError:
+            return "Amount must be a number"
+        if amount <= 0:
+            return "Amount must be greater than 0"
+    
+        if  not description.strip():
+            return "Description is required"   
         category = request.form["category"]
+
+        allowed_categories = ["Food", "Transport", "Bills", "Shopping", "Health", "Other"]
+
+        if category not in allowed_categories:
+            return "Invalid category"
+
         db = get_db()
 
         db.execute(
@@ -65,10 +78,10 @@ def edit_expense(expense_id):
             (description, amount, category, expense_id)
         )
 
-db.commit()
-db.close()
+        db.commit()
+        db.close()
 
-return redirect("/")
+        return redirect("/")
     db = get_db()
     expense = db.execute(
         "SELECT * FROM expenses WHERE id = ?",
@@ -77,4 +90,4 @@ return redirect("/")
     db.close()
     return render_template("edit.html", expense=expense)
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
