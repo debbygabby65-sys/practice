@@ -1,14 +1,36 @@
 from flask import Flask, render_template, request, redirect
-from database import get_db, get_expenses, get_total
+from database import get_db, get_expenses, get_total, get_expense_count, get_today_total, get_category_totals, search_expenses, filter_by_category, get_monthly_total
 from datetime import date
 app = Flask(__name__)
-
 @app.route("/")
 def home():
-    expenses = get_expenses()
+    search = request.args.get("search", "").strip()
+    category = request.args.get("category", "").strip()
+
+    if search:
+        expenses = search_expenses(search)
+    elif category:
+        expenses = filter_by_category(category)
+    else:
+        expenses = get_expenses()
+
     total = get_total()
+    count = get_expense_count()
+    today_total = get_today_total()
+    monthly_total = get_monthly_total()
+    category_totals = get_category_totals()
     total = f"{total:,.0f}"
-    return render_template("index.html", expenses=expenses, total=total)
+
+    return render_template(
+        "index.html",
+        expenses=expenses,
+        total=total,
+        count=count,
+        today_total=today_total,
+        monthly_total=monthly_total,
+        category_totals=category_totals
+    )
+
 @app.route("/add-expense", methods=["POST"])
 def add_expense():
     description = request.form["description"]
@@ -90,4 +112,4 @@ def edit_expense(expense_id):
     db.close()
     return render_template("edit.html", expense=expense)
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=False)

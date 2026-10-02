@@ -9,6 +9,23 @@
 
     <h1>Daily Expense Tracker</h1>
 
+    <form method="GET" action="/">
+        <input type="text" name="search" placeholder="Search expenses">
+        <button type="submit">Search</button>
+    </form>
+    <form method="GET" action="/">
+    <select name="category">
+        <option value="">All Categories</option>
+        <option value="Food">Food</option>
+        <option value="Transport">Transport</option>
+        <option value="Bills">Bills</option>
+        <option value="Shopping">Shopping</option>
+        <option value="Health">Health</option>
+        <option value="Other">Other</option>
+    </select>
+
+    <button type="submit">Filter</button>
+</form>
     <form method="POST" action="/add-expense">
 
         <label>Description:</label>
@@ -37,29 +54,57 @@
 
     </form>
 
-    <h2 class="total">Total Spent: ₦{{ total }}</h2>
+    <div class="dashboard">
+    <div class="total">
+        <h3>Total Spent</h3>
+        <p>₦{{ total }}</p>
+    </div>
 
+    <div class="total">
+        <h3>Number of Expenses</h3>
+        <p>{{ count }}</p>
+    </div>
+
+    <div class="total">
+        <h3>Today's Spending</h3>
+        <p>₦{{ "{:,.0f}".format(today_total) }}</p>
+    </div>
+    <div class="total">
+    <h3>This Month</h3>
+    <p>₦{{ "{:,.0f}".format(monthly_total) }}</p>
+</div>
+    </div>
+    <h2>Category Summary</h2>
+    {% for category, amount in category_totals %}
+    <p class="category-item">{{ category }} - ₦{{ "{:,.0f}".format(amount) }}</p>
+    {% endfor %}
     <h2>Expenses</h2>
 
     {% for expense in expenses %}
 
-        <p class="expense-item">
-            {{ expense[1] }} - ₦{{ "{:,.0f}".format(expense[2]) }} - {{ expense[3] }}
-        </p>
+    <div class="expense-item">
+    <strong>{{ expense[1] }}</strong>
+    <span>₦{{ "{:,.0f}".format(expense[2]) }}</span>
+    <span>{{ expense[3] }}</span>
+    <span>{{ expense[4] }}</span>
+</div>
+<div class="expense-actions">
 
-        <form method="POST"
-              action="/delete-expense/{{ expense[0] }}"
-              onsubmit="return confirm('Are you sure you want to delete this expense?');">
+    <form method="POST"
+          action="/delete-expense/{{ expense[0] }}"
+          onsubmit="return confirm('Are you sure you want to delete this expense?');">
 
-            <button type="submit" class="delete-button">Delete</button>
+        <button type="submit" class="delete-button">Delete</button>
 
-        </form>
+    </form>
 
-        <form method="GET" action="/edit-expense/{{ expense[0] }}">
+    <form method="GET" action="/edit-expense/{{ expense[0] }}">
 
-            <button type="submit" class="edit-button">Edit</button>
+        <button type="submit" class="edit-button">Edit</button>
 
-        </form>
+    </form>
+
+</div>
 
     {% endfor %}
 
