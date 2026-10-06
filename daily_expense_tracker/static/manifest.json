@@ -1,0 +1,12 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Daily Expense Tracker",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Expense Tracker",
+  "start_url": "/",
+  "theme_color": "#ffffff",
+  "id": "daily-expense-tracker"
+}
