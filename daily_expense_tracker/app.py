@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, send_from_directory
+from flask import Flask, render_template, request, redirect, send_file
 from database import (
     get_db,
     placeholder,
@@ -17,9 +17,8 @@ app = Flask(__name__)
 
 @app.route("/manifest.json")
 def manifest():
-    return send_from_directory(
-       "/home/student/practice/daily_expense_tracker/static",
-        "manifest.json"
+    return send_file(
+        app.static_folder + "/manifest.json"
     )
 
 @app.route("/")
