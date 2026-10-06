@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, send_from_directory
 from database import (
     get_db,
     placeholder,
@@ -15,6 +15,12 @@ from datetime import date
 
 app = Flask(__name__)
 
+@app.route("/manifest.json")
+def manifest():
+    return send_from_directory(
+       "/home/student/practice/daily_expense_tracker/static",
+        "manifest.json"
+    )
 
 @app.route("/")
 def home():
