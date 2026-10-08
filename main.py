@@ -11,6 +11,7 @@ print(text[0:5:2])
 
 language = 'Python'
 print(language[-1])
+
 print(language[-2])
 print(language[0:-5])
 
