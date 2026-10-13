@@ -25,3 +25,22 @@ score = int(input("enter your score: "))
 
 result = check_student_result(age, score)
 print(name, result)
+
+def withdraw_money(balance, amount):
+    if balance < 0 or amount < 0:
+        return "Invalid amount"
+    elif amount == 0:
+        return "Enter an amount greater than zero"
+    elif amount > balance:
+        return "Insufficient funds"
+    else:
+        new_balance = balance - amount
+        return new_balance
+
+name = input("enter your name: ")
+name = name.strip().title()
+
+balance = float(input("enter your current balance: "))
+amount = float(input("enter amount you want to withdraw: "))
+result = withdraw_money(balance, amount)
+print(name, result)
