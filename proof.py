@@ -39,3 +39,19 @@ running = True
 while running:
     print("welcome to python")
     running = False    
+
+students = {}
+name = input("Enter a student's name")
+students[name] = [] 
+score = int(input("Enter a score: "))
+students[name].append(score)
+print(student)
+scores = []
+for number in range(3):
+    score = int(input("Enter a score: "))
+    scores.append(score)
+    print(score)
+students = {}
+name = input("Enter a name: ")
+students[name] = []
+print(students)
