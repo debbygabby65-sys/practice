@@ -13,45 +13,83 @@ total_earning = daily_pay * number_of_days_worked
 print("Worker_name: ", worker_name)
 print("Total_earning: ", total_earning)
 
-print("===== STUDENT RESULT SYSTEM =====")
-print("Register student")
-print("Calculate average")
-print("Display grade")
-print("Display pass or fail")
-print("Exit")
-
-choice = input("Enter your choice: ")
-
-if  choice == "1":
-    print("Register student.")
-elif choice == "2":
-    print("Calculate average.")
-elif choice == "3":
-    print("Display grade.")
-elif choice == "4":
-    print("Display pass or fail.")
-elif choice == "5":
-    print("Exiting program.")
-else:
-    print("Invalid choice.")
-    
 running = True
-while running:
-    print("welcome to python")
-    running = False    
+students = {}
 
-students = {}
-name = input("Enter a student's name")
-students[name] = [] 
-score = int(input("Enter a score: "))
-students[name].append(score)
-print(student)
-scores = []
-for number in range(3):
-    score = int(input("Enter a score: "))
-    scores.append(score)
-    print(score)
-students = {}
-name = input("Enter a name: ")
-students[name] = []
-print(students)
+while running:
+    print("\n===== STUDENT RESULT SYSTEM =====")
+    print("1. Register student")
+    print("2. Calculate average")
+    print("3. Display grade")
+    print("4. Display pass or fail")
+    print("5. Exit")
+
+    choice = input("Enter a choice: ")
+
+    if choice == "1":
+        name = input("Enter student's name: ")
+        students[name] = []
+
+        for number in range(3):
+            score = int(input(f"Enter score {number + 1}: "))
+            students[name].append(score)
+
+        total = sum(students[name])
+        average = total / len(students[name])
+
+        print("\nStudent registered successfully!")
+        print("Student name:", name)
+        print("Scores:", students[name])
+        print("Total:", total)
+        print("Average:", round(average, 2))
+
+    elif choice == "2":
+        name = input("Enter student's name: ")
+
+        if name in students:
+            total = sum(students[name])
+            average = total / len(students[name])
+            print("Average:", round(average, 2))
+        else:
+            print("Student not found. Register the student first.")
+
+    elif choice == "3":
+        name = input("Enter student's name: ")
+
+        if name in students:
+            average = sum(students[name]) / len(students[name])
+
+            if average >= 70:
+                print("Grade A")
+            elif average >= 60:
+                print("Grade B")
+            elif average >= 50:
+                print("Grade C")
+            elif average >= 45:
+                print("Grade D")
+            else:
+                print("Grade F")
+        else:
+            print("Student not found. Register the student first.")
+
+    elif choice == "4":
+        name = input("Enter student's name: ")
+
+        if name in students:
+            average = sum(students[name]) / len(students[name])
+
+            if average >= 50:
+                print("Pass")
+            else:
+                print("Fail")
+        else:
+            print("Student not found. Register the student first.")
+
+    elif choice == "5":
+        print("Exiting program.")
+        running = False
+
+    else:
+        print("Invalid choice. Please try again.")
+
+print("Thank you for using the Student Result System!")
